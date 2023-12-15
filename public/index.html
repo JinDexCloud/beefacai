@@ -8,6 +8,14 @@
     <title>Bee须发财·哈机密组专属查单小工具</title>
     <link href="https://cdn.staticfile.org/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="./js/util.js"></script>
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+            min-height: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,6 +78,11 @@
     <!-- <script src="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script> -->
 
     <script>
+        let height = document.body.offsetHeight;
+        window.onresize = function () {
+            document.body.style.height = height + 'px';
+        };
+
         function search(e) {
             if (e.keyCode == 13) {
                 e.preventDefault();// 禁止键盘默认事件
