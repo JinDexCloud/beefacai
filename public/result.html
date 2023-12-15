@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee须发财·哈机密组专属查单小工具</title>
+    <link href="https://cdn.staticfile.org/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="card-header"
+        style="text-align: center;padding-top: 0.5rem; height: 2.5rem; background-image: linear-gradient(to left, #0ba360 0%, #3cba92 100%);">
+        <div style="color: #fff;">
+            <a style="position: absolute; top:0.45rem;left:0.6rem;" href="./index.html">
+                <svg class="icon"
+                    style="width: 1.5em;height: 1.5em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                    viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1483">
+                    <path
+                        d="M710.153924 8.980397L266.007127 460.692524a81.118646 81.118646 0 0 0 0.861532 114.476097l446.192936 441.050666a26.922883 26.922883 0 0 0 37.853573-38.284339L304.722232 536.884282a27.27288 27.27288 0 0 1-0.323074-38.445877L748.545955 46.726278A26.922883 26.922883 0 1 0 710.180847 9.00732z"
+                        fill="#fff" p-id="1484"></path>
+                </svg>
+            </a>
+            <svg class="card-img-top"
+                style="width: 1.0185546875em;height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                viewBox="0 0 1043 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2427">
+                <path
+                    d="M675.105007 655.142224m-314.413824 0a314.413824 314.413824 0 1 0 628.827647 0 314.413824 314.413824 0 1 0-628.827647 0Z"
+                    fill="#5CF1E7" p-id="2428"></path>
+                <path
+                    d="M752.687638 685.540097a45.36996 45.36996 0 0 0-33.57377 13.610989 48.092158 48.092158 0 0 0 0 67.60124l243.182986 243.182986a47.638458 47.638458 0 1 0 67.147541-67.60124l-242.729286-243.182986a48.999557 48.999557 0 0 0-34.027471-13.610989z"
+                    fill="#1F56F5" p-id="2429"></path>
+                <path
+                    d="M453.699601 907.399202a453.699601 453.699601 0 1 1 453.699601-453.699601c-2.268498 45.36996-3.629597 59.888347-4.990695 67.147541l-8.166593 48.545858a45.36996 45.36996 0 0 1-90.73992-14.518388l8.166593-50.814355C816.659282 490.449269 816.659282 453.699601 816.659282 453.699601a362.959681 362.959681 0 1 0-122.498892 272.219761s9.527692-9.527692 21.323881-24.046079a45.36996 45.36996 0 0 1 63.971644-5.444395 45.36996 45.36996 0 0 1 5.898095 63.517944 408.329641 408.329641 0 0 1-29.036775 32.212672A453.699601 453.699601 0 0 1 453.699601 907.399202z"
+                    fill="#1F56F5" p-id="2430"></path>
+                <path
+                    d="M251.803279 651.058928a45.36996 45.36996 0 0 1-39.471866-23.592379 306.70093 306.70093 0 0 1 118.415596-418.311033 45.36996 45.36996 0 1 1 45.36996 79.39743 216.868409 216.868409 0 0 0-83.027027 294.904741A45.36996 45.36996 0 0 1 272.219761 645.160833a45.36996 45.36996 0 0 1-20.416482 5.898095z"
+                    fill="#A8B9E9" p-id="2431"></path>
+            </svg>
+            <span>Bee须发财·哈机密组专属查单小工具</span>
+        </div>
+
+        <div style="position: fixed;top: 9%; left: 50%; -webkit-transform: translateX(-50%);">
+            <h5>您搜索的内容是: <code id="searchStr"></code></h5>
+        </div>
+        <div id="recordResult" style="position: fixed;top: 20%; left: 50%; -webkit-transform: translateX(-50%);">
+
+        </div>
+
+    </div>
+    <!-- <script src="https://cdn.staticfile.org/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script> -->
+    <script src="./js/util.js"></script>
+    <!-- use version 0.20.0 -->
+    <!-- <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script> -->
+    <script>
+        loading(true);
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+
+        window.onload = function (e) {
+            document.querySelector('#searchStr').innerText = getQueryVariable('searchStr');
+            init();
+        }
+
+        function init() {
+            var vika_token = 'uskbrPIK8CpJnJO8QKZTGfX';
+            var vika_sheetId = 'dstiSKWz5jyS2cTgEz';
+
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "Bearer " + vika_token);
+
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+
+            var searchStr = getQueryVariable('searchStr')
+
+            // var filterByFormula = encodeURIComponent(`OR({姓名} = "${searchStr}", {手机} = "${searchStr}")`);
+
+            const params = new URLSearchParams();
+            params.append('pageSize', '100');
+            params.append('maxRecords', '1000');
+            params.append('pageNum', '1');
+            params.append('filterByFormula', `{手机}="${searchStr}"`);
+            params.append('fieldKey', 'name');
+            params.append('cellFormat', 'json');
+
+            var url = `https://api.vika.cn/fusion/v1/datasheets/${vika_sheetId}/records?${params.toString()}`;
+
+            fetch(url, requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    var data = JSON.parse(result);
+                    var records = data.data.records;
+
+                    var recordResult = document.querySelector('#recordResult');
+
+                    if (!records || records.length == 0) {
+                        var ele = document.createElement('div')
+                        ele.className = "card border-info";
+                        ele.style = "min-width: 22rem; text-align: start;margin-bottom: 1rem;";
+                        ele.innerHTML = `<div class="card-header" style="text-align: center;">
+                    查询结果
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">未查到您输入的内容</li>
+                    <li class="list-group-item">请检查姓名或手机号是否有误</li>
+                </ul>`;
+
+                        recordResult.append(ele);
+                    }
+                    else {
+
+                        for (const reco of records) {
+                            // console.log(reco.fields);
+                            var ele = document.createElement('div')
+                            ele.className = "card border-info";
+                            ele.style = "min-width: 22rem; text-align: start;margin-bottom: 1rem;";
+                            ele.innerHTML = `<div class="card-header" style="text-align: center;">
+                    查询结果
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">手机号: <code>${reco.fields.手机}</code></li>
+                    <li class="list-group-item">快递公司: ${reco.fields.快递公司}</li>
+                    <li class="list-group-item">快递单号: <code>${reco.fields.快递单号}</code></li>
+                </ul>`;
+                            recordResult.append(ele);
+                        }
+                    }
+                    loading(false);
+                })
+                .catch(error => console.log('error', error));
+        }
+    </script>
+</body>
+
+</html>
