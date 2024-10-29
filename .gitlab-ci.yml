@@ -13,7 +13,7 @@
 #     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 variables:
   API_TOKEN: $DEPLOYMENT_TOKEN
-  APP_PATH: '$CI_PROJECT_DIR/src'
+  APP_PATH: '$CI_PROJECT_DIR/public'
 
 deploy:
   stage: deploy
