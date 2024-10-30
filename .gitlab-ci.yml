@@ -1,16 +1,4 @@
 # # The Docker image that will be used to build your app
-# image: busybox
-# pages:
-#   script:
-#     - echo "aaaa"
-#   artifacts:
-#     paths:
-#       # The folder that contains the files to be exposed at the Page URL
-#       - public
-#   rules:
-#     # This ensures that only pushes to the default branch will trigger
-#     # a pages deploy
-#     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 variables:
   API_TOKEN: $DEPLOYMENT_TOKEN
   APP_PATH: '$CI_PROJECT_DIR/public'
@@ -20,3 +8,17 @@ deploy:
   image: registry.gitlab.com/static-web-apps/azure-static-web-apps-deploy
   script:
     - echo "App deployed successfully."
+
+pages:
+  artifacts:
+    paths:
+      # The folder that contains the files to be exposed at the Page URL
+      - public
+  stage: deploy
+  image: busybox
+  script:
+    - echo "Pages deployed successfully."
+  rules:
+    # This ensures that only pushes to the default branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
